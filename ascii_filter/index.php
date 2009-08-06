@@ -1,9 +1,7 @@
 <?php
 /**
-* Filter input URL to strip certain characters
+* Filter input URL to encode high ASCII characters
 */
-// regex to match character to remove
-$regex = "%81";
 
 if (isset($_GET["url"])) {
     $url = $_GET["url"];
@@ -11,9 +9,7 @@ if (isset($_GET["url"])) {
     if ($handle) {
         while (!feof($handle)) {
             $line = fgets($handle);
-//            echo urldecode(preg_replace('/'.$regex.'/', "", urlencode($line)));
             echo filter_var($line,FILTER_UNSAFE_RAW,FILTER_FLAG_ENCODE_HIGH);
-            
         }
         fclose($handle);
     }

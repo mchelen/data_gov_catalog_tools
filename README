@@ -4,4 +4,5 @@ License: Creative Commons Zero Public Domain http://creativecommons.org/publicdo
 Tools included:
 
 ascii_filter
-    encodes high ascii characters to help reading of CSV file by other parsers
+    Filter input URL to encode high ASCII characters
+
