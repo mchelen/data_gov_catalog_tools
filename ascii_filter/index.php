@@ -2,7 +2,6 @@
 /**
 * Filter input URL to encode high ASCII characters
 */
-
 if (isset($_GET["url"])) {
     $url = $_GET["url"];
     $handle = fopen($url, "r");
@@ -15,7 +14,7 @@ if (isset($_GET["url"])) {
     }
 }
 else {
-echo '<html><body><form name="input" method="get">
+    echo '<html><body><form name="input" method="get">
 URL: <input type="text" name="url" value="http://www.data.gov/data_gov_catalog.csv" /><br />
 <input type="submit" value="Submit" /></form></body></html>';
 }
