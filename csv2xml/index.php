@@ -33,11 +33,13 @@ function csv2xml($handle, $rootName, $rowName) {
     }
     return $doc;
 }
-// example function usage
-// get inputs
+/**
+ * example function usage
+ */
+//get inputs
 $url = $_GET["url"];
-$row = "row";
-$container = "container";
+$row = $_GET["row"];
+$root = $_GET["root"];
 if (isset($url)) {
     header('Content-Type: text/xml');
     $params = array('http' => array(
@@ -45,7 +47,7 @@ if (isset($url)) {
                       ));
     $ctx = stream_context_create($params);
     $handle = @fopen($url, 'rb', false, $ctx);
-    $xml = csv2xml($handle,"test1","test2");
+    $xml = csv2xml($handle,$root,$row);
     $xml->formatOutput=true;
     echo $xml->saveXML();
 }
@@ -53,7 +55,7 @@ else {
     echo '<html><body><form name="input" method="get">
     URL: <input type="text" name="url" /><br />
     Row name: <input type="text" name="row" value="row" /><br />
-    Root name: <input type="text" name="container" value="root" /><br />
+    Root name: <input type="text" name="root" value="root" /><br />
     <input type="submit" value="Submit" /></form></body></html>';
 }
 ?>
