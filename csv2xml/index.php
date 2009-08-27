@@ -24,7 +24,8 @@ function csv2xml($handle, $rootName, $rowName) {
     while (($data = fgetcsv($handle, 0, ',')) !== FALSE) {
         $rowNode = $doc->createElement($rowName);
         $rootNode->appendChild($rowNode);
-        for ($i=0;$i<count($data);$i++) {
+//      loop through the fields in the row
+        for ($i=0;($i<count($data))&&($i<count($columnData));$i++) {
 //          strips illegal characters from node names
 //          and encodes characters in the node content 
             $fieldNode = $doc->createElement(preg_replace('/[^a-zA-Z0-9]/',"",$columnData[$i]),htmlspecialchars(utf8_encode($data[$i])));
