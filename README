@@ -10,3 +10,6 @@ ascii_filter
 
 csv2xml
     Convert CSV to XML 
+
+drupal_cck
+    Drupal CCK content type for Data.gov datasets
