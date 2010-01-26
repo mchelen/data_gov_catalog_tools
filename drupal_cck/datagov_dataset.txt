@@ -30,46 +30,38 @@ $content['type']  = array (
   'comment_subject_field' => '1',
   'comment_preview' => '1',
   'comment_form_location' => '0',
-  'feedapi' => 
-  array (
-    'enabled' => false,
-    'upload_method' => 'url',
-    'refresh_on_create' => 0,
-    'update_existing' => 1,
-    'refresh_time' => 1800,
-    'items_delete' => 0,
-    'parsers' => 
-    array (
-      'parser_csv' => 
-      array (
-        'enabled' => false,
-        'weight' => 0,
-        'delimiter' => ',',
-      ),
-    ),
-    'processors' => 
-    array (
-      'feedapi_node' => 
-      array (
-        'enabled' => false,
-        'weight' => 0,
-        'content_type' => 'story',
-        'input_format' => 0,
-        'node_date' => 'feed',
-        'x_dedupe' => 0,
-      ),
-    ),
-  ),
+  'fivestar' => 1,
+  'fivestar_stars' => '4',
+  'fivestar_labels_enable' => 1,
+  'fivestar_label_0' => 'Cancel rating',
+  'fivestar_label_1' => 'Poor',
+  'fivestar_label_2' => 'Okay',
+  'fivestar_label_3' => 'Good',
+  'fivestar_label_4' => 'Great',
+  'fivestar_label_5' => 'Awesome',
+  'fivestar_label_6' => 'Give it @star/@count',
+  'fivestar_label_7' => 'Give it @star/@count',
+  'fivestar_label_8' => 'Give it @star/@count',
+  'fivestar_label_9' => 'Give it @star/@count',
+  'fivestar_label_10' => 'Give it @star/@count',
+  'fivestar_style' => 'dual',
+  'fivestar_text' => 'dual',
+  'fivestar_title' => 1,
+  'fivestar_feedback' => 1,
+  'fivestar_unvote' => 1,
+  'fivestar_position_teaser' => 'hidden',
+  'fivestar_position' => 'below',
+  'fivestar_comment' => '1',
 );
 $content['fields']  = array (
   0 => 
   array (
-    'label' => 'URL',
-    'field_name' => 'field_url',
+    'label' => 'Agency',
+    'field_name' => 'field_agency',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '31',
+    'weight' => '3',
     'rows' => 5,
     'size' => '60',
     'description' => '',
@@ -78,7 +70,7 @@ $content['fields']  = array (
       0 => 
       array (
         'value' => '',
-        '_error_element' => 'default_value_widget][field_url][0][value',
+        '_error_element' => 'default_value_widget][field_agency][0][value',
       ),
     ),
     'default_value_php' => '',
@@ -145,34 +137,39 @@ $content['fields']  = array (
   ),
   1 => 
   array (
-    'label' => 'Agency',
-    'field_name' => 'field_agency',
+    'label' => 'Subagency',
+    'field_name' => 'field_subagency',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '32',
+    'weight' => '4',
     'rows' => 5,
-    'size' => 60,
+    'size' => '60',
     'description' => '',
     'default_value' => 
     array (
+      0 => 
+      array (
+        'value' => '',
+        '_error_element' => 'default_value_widget][field_subagency][0][value',
+      ),
     ),
     'default_value_php' => '',
     'default_value_widget' => 
     array (
-      'field_agency' => 
+      'field_subagency' => 
       array (
         0 => 
         array (
           'value' => '',
-          '_error_element' => 'default_value_widget][field_agency][0][value',
+          '_error_element' => 'default_value_widget][field_subagency][0][value',
         ),
       ),
     ),
     'group' => false,
     'required' => 0,
     'multiple' => '0',
-    'text_processing' => '',
+    'text_processing' => '0',
     'max_length' => '',
     'allowed_values' => '',
     'allowed_values_php' => '',
@@ -236,7 +233,7 @@ $content['fields']  = array (
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '33',
+    'weight' => '5',
     'rows' => 5,
     'size' => '60',
     'description' => '',
@@ -322,218 +319,12 @@ $content['fields']  = array (
   ),
   3 => 
   array (
-    'label' => 'Date Released',
-    'field_name' => 'field_datereleased',
-    'type' => 'date',
-    'widget_type' => 'date_text',
-    'change' => 'Change basic information',
-    'weight' => '34',
-    'default_value' => 'blank',
-    'default_value2' => 'same',
-    'default_value_code' => '',
-    'default_value_code2' => '',
-    'input_format' => 'm/d/Y - H:i:s',
-    'input_format_custom' => '',
-    'advanced' => 
-    array (
-      'label_position' => 'above',
-      'text_parts' => 
-      array (
-        'year' => 0,
-        'month' => 0,
-        'day' => 0,
-        'hour' => 0,
-        'minute' => 0,
-        'second' => 0,
-      ),
-    ),
-    'increment' => 1,
-    'year_range' => '-3:+3',
-    'label_position' => 'above',
-    'text_parts' => 
-    array (
-    ),
-    'description' => '',
-    'group' => false,
-    'required' => 0,
-    'multiple' => '0',
-    'repeat' => 0,
-    'todate' => '',
-    'granularity' => 
-    array (
-      'year' => 'year',
-      'month' => 'month',
-      'day' => 'day',
-      'hour' => 'hour',
-      'minute' => 'minute',
-    ),
-    'default_format' => 'medium',
-    'tz_handling' => 'site',
-    'timezone_db' => 'UTC',
-    'op' => 'Save field settings',
-    'module' => 'date',
-    'widget_module' => 'date',
-    'columns' => 
-    array (
-      'value' => 
-      array (
-        'type' => 'varchar',
-        'length' => 20,
-        'not null' => false,
-        'sortable' => true,
-        'views' => true,
-      ),
-    ),
-    'display_settings' => 
-    array (
-      'label' => 
-      array (
-        'format' => 'above',
-        'exclude' => 0,
-      ),
-      'teaser' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      4 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      2 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      3 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'token' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-  ),
-  4 => 
-  array (
-    'label' => 'Date Updated',
-    'field_name' => 'field_dateupdated',
-    'type' => 'date',
-    'widget_type' => 'date_text',
-    'change' => 'Change basic information',
-    'weight' => '35',
-    'default_value' => 'blank',
-    'default_value2' => 'same',
-    'default_value_code' => '',
-    'default_value_code2' => '',
-    'input_format' => 'm/d/Y - H:i:s',
-    'input_format_custom' => '',
-    'advanced' => 
-    array (
-      'label_position' => 'above',
-      'text_parts' => 
-      array (
-        'year' => 0,
-        'month' => 0,
-        'day' => 0,
-        'hour' => 0,
-        'minute' => 0,
-        'second' => 0,
-      ),
-    ),
-    'increment' => 1,
-    'year_range' => '-3:+3',
-    'label_position' => 'above',
-    'text_parts' => 
-    array (
-    ),
-    'description' => '',
-    'group' => false,
-    'required' => 0,
-    'multiple' => '0',
-    'repeat' => 0,
-    'todate' => '',
-    'granularity' => 
-    array (
-      'year' => 'year',
-      'month' => 'month',
-      'day' => 'day',
-      'hour' => 'hour',
-      'minute' => 'minute',
-    ),
-    'default_format' => 'medium',
-    'tz_handling' => 'site',
-    'timezone_db' => 'UTC',
-    'op' => 'Save field settings',
-    'module' => 'date',
-    'widget_module' => 'date',
-    'columns' => 
-    array (
-      'value' => 
-      array (
-        'type' => 'varchar',
-        'length' => 20,
-        'not null' => false,
-        'sortable' => true,
-        'views' => true,
-      ),
-    ),
-    'display_settings' => 
-    array (
-      'label' => 
-      array (
-        'format' => 'above',
-        'exclude' => 0,
-      ),
-      'teaser' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      4 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      2 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      3 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'token' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-  ),
-  5 => 
-  array (
     'label' => 'Time Period',
     'field_name' => 'field_timeperiod',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '36',
+    'weight' => '6',
     'rows' => 5,
     'size' => '60',
     'description' => '',
@@ -617,14 +408,405 @@ $content['fields']  = array (
       ),
     ),
   ),
+  4 => 
+  array (
+    'label' => 'Date Released',
+    'field_name' => 'field_datereleased',
+    'type' => 'text',
+    'widget_type' => 'text_textfield',
+    'change' => 'Change basic information',
+    'weight' => '7',
+    'rows' => 5,
+    'size' => '60',
+    'description' => '',
+    'default_value' => 
+    array (
+      0 => 
+      array (
+        'value' => '',
+        '_error_element' => 'default_value_widget][field_datereleased][0][value',
+      ),
+    ),
+    'default_value_php' => '',
+    'default_value_widget' => 
+    array (
+      'field_datereleased' => 
+      array (
+        0 => 
+        array (
+          'value' => '',
+          '_error_element' => 'default_value_widget][field_datereleased][0][value',
+        ),
+      ),
+    ),
+    'group' => false,
+    'required' => 0,
+    'multiple' => '0',
+    'text_processing' => '0',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'op' => 'Save field settings',
+    'module' => 'text',
+    'widget_module' => 'text',
+    'columns' => 
+    array (
+      'value' => 
+      array (
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => false,
+        'sortable' => true,
+        'views' => true,
+      ),
+    ),
+    'display_settings' => 
+    array (
+      'label' => 
+      array (
+        'format' => 'above',
+        'exclude' => 0,
+      ),
+      'teaser' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      4 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      2 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      3 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+  ),
+  5 => 
+  array (
+    'label' => 'Date Updated',
+    'field_name' => 'field_dateupdated',
+    'type' => 'text',
+    'widget_type' => 'text_textfield',
+    'change' => 'Change basic information',
+    'weight' => '8',
+    'rows' => 5,
+    'size' => '60',
+    'description' => '',
+    'default_value' => 
+    array (
+      0 => 
+      array (
+        'value' => '',
+        '_error_element' => 'default_value_widget][field_dateupdated][0][value',
+      ),
+    ),
+    'default_value_php' => '',
+    'default_value_widget' => 
+    array (
+      'field_dateupdated' => 
+      array (
+        0 => 
+        array (
+          'value' => '',
+          '_error_element' => 'default_value_widget][field_dateupdated][0][value',
+        ),
+      ),
+    ),
+    'group' => false,
+    'required' => 0,
+    'multiple' => '0',
+    'text_processing' => '0',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'op' => 'Save field settings',
+    'module' => 'text',
+    'widget_module' => 'text',
+    'columns' => 
+    array (
+      'value' => 
+      array (
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => false,
+        'sortable' => true,
+        'views' => true,
+      ),
+    ),
+    'display_settings' => 
+    array (
+      'label' => 
+      array (
+        'format' => 'above',
+        'exclude' => 0,
+      ),
+      'teaser' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      4 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      2 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      3 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+  ),
+  6 => 
+  array (
+    'label' => 'Citation',
+    'field_name' => 'field_citation',
+    'type' => 'text',
+    'widget_type' => 'text_textfield',
+    'change' => 'Change basic information',
+    'weight' => '9',
+    'rows' => 5,
+    'size' => '240',
+    'description' => '',
+    'default_value' => 
+    array (
+      0 => 
+      array (
+        'value' => '',
+        '_error_element' => 'default_value_widget][field_citation][0][value',
+      ),
+    ),
+    'default_value_php' => '',
+    'default_value_widget' => 
+    array (
+      'field_citation' => 
+      array (
+        0 => 
+        array (
+          'value' => '',
+          '_error_element' => 'default_value_widget][field_citation][0][value',
+          'format' => 1,
+        ),
+      ),
+    ),
+    'group' => false,
+    'required' => 0,
+    'multiple' => '0',
+    'text_processing' => '1',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'op' => 'Save field settings',
+    'module' => 'text',
+    'widget_module' => 'text',
+    'columns' => 
+    array (
+      'value' => 
+      array (
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => false,
+        'sortable' => true,
+        'views' => true,
+      ),
+      'format' => 
+      array (
+        'type' => 'int',
+        'unsigned' => true,
+        'not null' => false,
+        'views' => false,
+      ),
+    ),
+    'display_settings' => 
+    array (
+      'label' => 
+      array (
+        'format' => 'above',
+        'exclude' => 0,
+      ),
+      'teaser' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      4 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      2 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      3 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+  ),
+  7 => 
+  array (
+    'label' => 'URL',
+    'field_name' => 'field_url',
+    'type' => 'link',
+    'widget_type' => 'link',
+    'change' => 'Change basic information',
+    'weight' => '10',
+    'description' => '',
+    'default_value' => 
+    array (
+      0 => 
+      array (
+        'title' => '',
+        'url' => '',
+      ),
+    ),
+    'default_value_php' => '',
+    'default_value_widget' => 
+    array (
+      'field_url' => 
+      array (
+        0 => 
+        array (
+          'title' => '',
+          'url' => '',
+        ),
+      ),
+    ),
+    'group' => false,
+    'required' => 0,
+    'multiple' => '0',
+    'url' => 0,
+    'title' => '',
+    'title_value' => '',
+    'enable_tokens' => 0,
+    'display' => 
+    array (
+      'url_cutoff' => '80',
+    ),
+    'attributes' => 
+    array (
+      'target' => 'default',
+      'rel' => '',
+      'class' => '',
+    ),
+    'op' => 'Save field settings',
+    'module' => 'link',
+    'widget_module' => 'link',
+    'columns' => 
+    array (
+      'url' => 
+      array (
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => false,
+        'sortable' => true,
+      ),
+      'title' => 
+      array (
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => false,
+        'sortable' => true,
+      ),
+      'attributes' => 
+      array (
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => false,
+      ),
+    ),
+    'display_settings' => 
+    array (
+      'label' => 
+      array (
+        'format' => 'above',
+        'exclude' => 0,
+      ),
+      'teaser' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      4 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      2 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      3 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+  ),
 );
 $content['extra']  = array (
   'title' => '-5',
-  'body_field' => '0',
-  'revision_information' => '20',
-  'comment_settings' => '30',
-  'menu' => '-2',
-  'path' => '30',
-  'attachments' => '30',
+  'body_field' => '-3',
+  'revision_information' => '-2',
+  'comment_settings' => '1',
+  'menu' => '-4',
+  'path' => '0',
+  'attachments' => '-1',
 );
-
