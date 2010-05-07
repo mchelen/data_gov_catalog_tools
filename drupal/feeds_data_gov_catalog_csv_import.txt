@@ -9,25 +9,295 @@ $feeds_importer->config = array(
     'plugin_key' => 'FeedsHTTPFetcher',
     'config' => array(
       'auto_detect_feeds' => FALSE,
+      'use_pubsubhubbub' => FALSE,
+      'designated_hub' => '',
     ),
   ),
   'parser' => array(
-    'plugin_key' => 'FeedsSyndicationParser',
-    'config' => array(),
+    'plugin_key' => 'FeedsCSVParser',
+    'config' => array(
+      'delimiter' => ',',
+    ),
   ),
   'processor' => array(
     'plugin_key' => 'FeedsNodeProcessor',
     'config' => array(
-      'content_type' => 'story',
-      'update_existing' => 0,
-      'expire' => -1,
-      'mappings' => array(),
+      'content_type' => 'datagov_dataset',
+      'update_existing' => 1,
+      'expire' => '-1',
+      'mappings' => array(
+        '0' => array(
+          'source' => 'URL',
+          'target' => 'url',
+          'unique' => 1,
+        ),
+        '1' => array(
+          'source' => 'Title',
+          'target' => 'title',
+          'unique' => FALSE,
+        ),
+        '2' => array(
+          'source' => 'Agency',
+          'target' => 'field_agency',
+          'unique' => FALSE,
+        ),
+        '3' => array(
+          'source' => 'Subagency',
+          'target' => 'field_subagency',
+          'unique' => FALSE,
+        ),
+        '4' => array(
+          'source' => 'Category',
+          'target' => 'field_category',
+          'unique' => FALSE,
+        ),
+        '5' => array(
+          'source' => 'Date Released',
+          'target' => 'field_datereleased',
+          'unique' => FALSE,
+        ),
+        '6' => array(
+          'source' => 'Date Updated',
+          'target' => 'field_dateupdated',
+          'unique' => FALSE,
+        ),
+        '7' => array(
+          'source' => 'Time Period',
+          'target' => 'field_timeperiod',
+          'unique' => FALSE,
+        ),
+        '8' => array(
+          'source' => 'Frequency',
+          'target' => 'field_frequency',
+          'unique' => FALSE,
+        ),
+        '9' => array(
+          'source' => 'Description',
+          'target' => 'body',
+          'unique' => FALSE,
+        ),
+        '10' => array(
+          'source' => 'Data.gov Data Category Type',
+          'target' => 'field_datagov_data_category',
+          'unique' => FALSE,
+        ),
+        '11' => array(
+          'source' => 'Specialized Data Category Designation',
+          'target' => 'field_specialized_data_category',
+          'unique' => FALSE,
+        ),
+        '12' => array(
+          'source' => 'Keywords',
+          'target' => 'taxonomy:1',
+          'unique' => FALSE,
+        ),
+        '13' => array(
+          'source' => 'Citation',
+          'target' => 'field_citation',
+          'unique' => FALSE,
+        ),
+        '14' => array(
+          'source' => 'Agency Program Page',
+          'target' => 'field_agency_program_page',
+          'unique' => FALSE,
+        ),
+        '15' => array(
+          'source' => 'Agency Data Series Page',
+          'target' => 'field_agency_data_series_page',
+          'unique' => FALSE,
+        ),
+        '16' => array(
+          'source' => 'Unit of Analysis',
+          'target' => 'field_unit_of_analysis',
+          'unique' => FALSE,
+        ),
+        '17' => array(
+          'source' => 'Granularity',
+          'target' => 'field_granularity',
+          'unique' => FALSE,
+        ),
+        '18' => array(
+          'source' => 'Geographic Coverage',
+          'target' => 'field_geographic_coverage',
+          'unique' => FALSE,
+        ),
+        '19' => array(
+          'source' => 'Collection Mode',
+          'target' => 'field_collection_mode',
+          'unique' => FALSE,
+        ),
+        '20' => array(
+          'source' => 'Data Collection Instrument',
+          'target' => 'field_data_collection_instrument',
+          'unique' => FALSE,
+        ),
+        '21' => array(
+          'source' => 'Data Dictionary/Variable List',
+          'target' => 'field_data_dictionary_variable_l',
+          'unique' => FALSE,
+        ),
+        '22' => array(
+          'source' => 'Applicable Agency Information Quality Guideline Designation',
+          'target' => 'field_applicable_agency_info',
+          'unique' => FALSE,
+        ),
+        '23' => array(
+          'source' => 'Data Quality Certification',
+          'target' => 'field_data_quality_certification',
+          'unique' => FALSE,
+        ),
+        '24' => array(
+          'source' => 'Privacy and Confidentiality',
+          'target' => 'field_privacy_and_conf',
+          'unique' => FALSE,
+        ),
+        '25' => array(
+          'source' => 'Technical Documentation',
+          'target' => 'field_technical_documentation',
+          'unique' => FALSE,
+        ),
+        '26' => array(
+          'source' => 'Additional Metadata',
+          'target' => 'field_additional_metadata',
+          'unique' => FALSE,
+        ),
+        '27' => array(
+          'source' => 'FGDC Compliance (Geospatial Only)',
+          'target' => 'field_fgdc_compliance',
+          'unique' => FALSE,
+        ),
+        '28' => array(
+          'source' => 'Statistical Methodology',
+          'target' => 'field_statistical_methodology',
+          'unique' => FALSE,
+        ),
+        '29' => array(
+          'source' => 'Sampling',
+          'target' => 'field_sampling',
+          'unique' => FALSE,
+        ),
+        '30' => array(
+          'source' => 'Estimation',
+          'target' => 'field_estimation',
+          'unique' => FALSE,
+        ),
+        '31' => array(
+          'source' => 'Weighting',
+          'target' => 'field_weighting',
+          'unique' => FALSE,
+        ),
+        '32' => array(
+          'source' => 'Disclosure Avoidance',
+          'target' => 'field_disclosure_avoidance',
+          'unique' => FALSE,
+        ),
+        '33' => array(
+          'source' => 'Questionnaire Design',
+          'target' => 'field_questionnaire_design',
+          'unique' => FALSE,
+        ),
+        '34' => array(
+          'source' => 'Series Breaks',
+          'target' => 'field_series_breaks',
+          'unique' => FALSE,
+        ),
+        '35' => array(
+          'source' => 'Non-response Adjustment',
+          'target' => 'field_non_response_adjustment',
+          'unique' => FALSE,
+        ),
+        '36' => array(
+          'source' => 'Seasonal Adjustment',
+          'target' => 'field_seasonal_adjustment',
+          'unique' => FALSE,
+        ),
+        '37' => array(
+          'source' => 'Statistical Characteristics',
+          'target' => 'field_statistical_characteristic',
+          'unique' => FALSE,
+        ),
+        '38' => array(
+          'source' => 'Feeds Access Point',
+          'target' => 'field_feeds_access_point:url',
+          'unique' => FALSE,
+        ),
+        '39' => array(
+          'source' => 'Feeds File Size',
+          'target' => 'field_feeds_file_size',
+          'unique' => FALSE,
+        ),
+        '40' => array(
+          'source' => 'XML Access Point',
+          'target' => 'field_xml_access_point:url',
+          'unique' => FALSE,
+        ),
+        '41' => array(
+          'source' => 'XML File Size',
+          'target' => 'field_xml_file_size',
+          'unique' => FALSE,
+        ),
+        '42' => array(
+          'source' => 'CSV/TXT Access Point',
+          'target' => 'field_csv_txt_access_point:url',
+          'unique' => FALSE,
+        ),
+        '43' => array(
+          'source' => 'CSV/TXT File Size',
+          'target' => 'field_csv_txt_file_size',
+          'unique' => FALSE,
+        ),
+        '44' => array(
+          'source' => 'XLS Access Point',
+          'target' => 'field_xls_access_point:url',
+          'unique' => FALSE,
+        ),
+        '45' => array(
+          'source' => 'XLS File Size',
+          'target' => 'field_xls_file_size',
+          'unique' => FALSE,
+        ),
+        '46' => array(
+          'source' => 'KML/KMZ Access Point',
+          'target' => 'field_kml_kmz_access_point:url',
+          'unique' => FALSE,
+        ),
+        '47' => array(
+          'source' => 'KML File Size',
+          'target' => 'field_kml_file_size',
+          'unique' => FALSE,
+        ),
+        '48' => array(
+          'source' => 'ESRI Access Point',
+          'target' => 'field_esri_access_point:url',
+          'unique' => FALSE,
+        ),
+        '49' => array(
+          'source' => 'ESRI File Size',
+          'target' => 'field_esri_file_size',
+          'unique' => FALSE,
+        ),
+        '50' => array(
+          'source' => 'Map Access Point',
+          'target' => 'field_map_access_point:url',
+          'unique' => FALSE,
+        ),
+        '51' => array(
+          'source' => 'Data Extraction Access Point',
+          'target' => 'field_data_extraction_access_poi:url',
+          'unique' => FALSE,
+        ),
+        '52' => array(
+          'source' => 'Widget Access Point',
+          'target' => 'field_widget_access_point:url',
+          'unique' => FALSE,
+        ),
+      ),
     ),
   ),
-  'content_type' => 'page',
+  'content_type' => 'feed',
   'update' => 0,
-  'import_period' => 1800,
+  'import_period' => '10800',
   'expire_period' => 3600,
-  'import_on_create' => TRUE,
+  'import_on_create' => 1,
 );
 
