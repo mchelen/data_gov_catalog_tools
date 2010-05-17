@@ -14,6 +14,7 @@ $content['type']  = array (
     'revision' => false,
   ),
   'upload' => '1',
+  'creativecommons' => 0,
   'old_type' => 'datagov_dataset',
   'orig_type' => '',
   'module' => 'node',
@@ -26,10 +27,10 @@ $content['type']  = array (
   'comment_default_order' => '1',
   'comment_default_per_page' => '50',
   'comment_controls' => '3',
-  'comment_anonymous' => 0,
-  'comment_subject_field' => '1',
-  'comment_preview' => '1',
-  'comment_form_location' => '0',
+  'comment_anonymous' => '1',
+  'comment_subject_field' => '0',
+  'comment_preview' => '0',
+  'comment_form_location' => '1',
   'fivestar' => 1,
   'fivestar_stars' => '4',
   'fivestar_labels_enable' => 1,
@@ -50,27 +51,25 @@ $content['type']  = array (
   'fivestar_feedback' => 1,
   'fivestar_unvote' => 1,
   'fivestar_position_teaser' => 'hidden',
-  'fivestar_position' => 'below',
+  'fivestar_position' => 'above',
   'fivestar_comment' => '1',
 );
 $content['fields']  = array (
   0 => 
   array (
-    'label' => 'Agency',
-    'field_name' => 'field_agency',
-    'type' => 'text',
-    'widget_type' => 'text_textfield',
+    'label' => 'Catalog URL',
+    'field_name' => 'field_catalog_url',
+    'type' => 'link',
+    'widget_type' => 'link',
     'change' => 'Change basic information',
-    'weight' => '4',
-    'rows' => 5,
-    'size' => '60',
+    'weight' => '2',
     'description' => '',
     'default_value' => 
     array (
       0 => 
       array (
-        'value' => '',
-        '_error_element' => 'default_value_widget][field_agency][0][value',
+        'title' => '',
+        'url' => '',
       ),
     ),
     'default_value_php' => '',
@@ -78,30 +77,54 @@ $content['fields']  = array (
     'group' => false,
     'required' => 0,
     'multiple' => '0',
-    'text_processing' => '0',
-    'max_length' => '',
-    'allowed_values' => '',
-    'allowed_values_php' => '',
+    'url' => 0,
+    'title' => 'none',
+    'title_value' => '',
+    'enable_tokens' => 0,
+    'display' => 
+    array (
+      'url_cutoff' => '80',
+    ),
+    'attributes' => 
+    array (
+      'target' => 'default',
+      'rel' => '',
+      'class' => '',
+      'title' => '',
+    ),
     'op' => 'Save field settings',
-    'module' => 'text',
-    'widget_module' => 'text',
+    'module' => 'link',
+    'widget_module' => 'link',
     'columns' => 
     array (
-      'value' => 
+      'url' => 
       array (
-        'type' => 'text',
-        'size' => 'big',
+        'type' => 'varchar',
+        'length' => 2048,
         'not null' => false,
         'sortable' => true,
-        'views' => true,
+      ),
+      'title' => 
+      array (
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => false,
+        'sortable' => true,
+      ),
+      'attributes' => 
+      array (
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => false,
       ),
     ),
     'display_settings' => 
     array (
+      'weight' => '2',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -137,12 +160,283 @@ $content['fields']  = array (
   ),
   1 => 
   array (
+    'label' => 'Data.gov Dataset Number',
+    'field_name' => 'field_datagov_dataset_number',
+    'type' => 'computed',
+    'widget_type' => 'computed',
+    'change' => 'Change basic information',
+    'weight' => '3',
+    'description' => '',
+    'default_value' => 
+    array (
+    ),
+    'default_value_php' => '',
+    'group' => false,
+    'required' => 0,
+    'multiple' => '0',
+    'code' => '// get last two segments of host name
+
+// preg_match(\'/[0-9]+$/\', $node->field_catalog_url[0][\'value\'], $result);
+
+// $raw_test = $node->field_catalog_url[0][\'value\'];
+
+$url_array = explode("/",$node->field_catalog_url[0][\'url\']);
+
+$node_field[0][\'value\'] = end($url_array)*1;
+
+',
+    'display_format' => '$display = $node_field_item[\'value\'];',
+    'store' => 1,
+    'data_type' => 'int',
+    'data_length' => '24',
+    'data_default' => '',
+    'data_not_NULL' => 0,
+    'data_sortable' => 1,
+    'op' => 'Save field settings',
+    'module' => 'computed_field',
+    'widget_module' => 'computed_field',
+    'columns' => 
+    array (
+      'value' => 
+      array (
+        'type' => 'int',
+        'length' => '24',
+        'not NULL' => 0,
+        'sortable' => 1,
+      ),
+    ),
+    'display_settings' => 
+    array (
+      'weight' => '3',
+      'parent' => '',
+      'label' => 
+      array (
+        'format' => 'inline',
+      ),
+      'teaser' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      4 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      2 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      3 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+  ),
+  2 => 
+  array (
+    'label' => 'Agency',
+    'field_name' => 'field_agency',
+    'type' => 'text',
+    'widget_type' => 'text_textfield',
+    'change' => 'Change basic information',
+    'weight' => '5',
+    'rows' => 5,
+    'size' => '60',
+    'description' => '',
+    'default_value' => 
+    array (
+      0 => 
+      array (
+        'value' => '',
+        '_error_element' => 'default_value_widget][field_agency][0][value',
+      ),
+    ),
+    'default_value_php' => '',
+    'default_value_widget' => 
+    array (
+      'field_agency' => 
+      array (
+        0 => 
+        array (
+          'value' => '',
+          '_error_element' => 'default_value_widget][field_agency][0][value',
+        ),
+      ),
+    ),
+    'group' => false,
+    'required' => 0,
+    'multiple' => '0',
+    'text_processing' => '0',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'op' => 'Save field settings',
+    'module' => 'text',
+    'widget_module' => 'text',
+    'columns' => 
+    array (
+      'value' => 
+      array (
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => false,
+        'sortable' => true,
+        'views' => true,
+      ),
+    ),
+    'display_settings' => 
+    array (
+      'weight' => '5',
+      'parent' => '',
+      'label' => 
+      array (
+        'format' => 'inline',
+      ),
+      'teaser' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      4 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      2 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      3 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+  ),
+  3 => 
+  array (
+    'label' => 'Subagency',
+    'field_name' => 'field_subagency',
+    'type' => 'text',
+    'widget_type' => 'text_textfield',
+    'change' => 'Change basic information',
+    'weight' => '6',
+    'rows' => 5,
+    'size' => '60',
+    'description' => '',
+    'default_value' => 
+    array (
+      0 => 
+      array (
+        'value' => '',
+        '_error_element' => 'default_value_widget][field_subagency][0][value',
+      ),
+    ),
+    'default_value_php' => '',
+    'default_value_widget' => 
+    array (
+      'field_subagency' => 
+      array (
+        0 => 
+        array (
+          'value' => '',
+          '_error_element' => 'default_value_widget][field_subagency][0][value',
+        ),
+      ),
+    ),
+    'group' => false,
+    'required' => 0,
+    'multiple' => '0',
+    'text_processing' => '0',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'op' => 'Save field settings',
+    'module' => 'text',
+    'widget_module' => 'text',
+    'columns' => 
+    array (
+      'value' => 
+      array (
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => false,
+        'sortable' => true,
+        'views' => true,
+      ),
+    ),
+    'display_settings' => 
+    array (
+      'weight' => '6',
+      'parent' => '',
+      'label' => 
+      array (
+        'format' => 'inline',
+      ),
+      'teaser' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      4 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      2 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      3 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+  ),
+  4 => 
+  array (
     'label' => 'Category',
     'field_name' => 'field_category',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '5',
+    'weight' => '7',
     'rows' => 5,
     'size' => '60',
     'description' => '',
@@ -189,10 +483,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '7',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -226,14 +521,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  2 => 
+  5 => 
   array (
     'label' => 'Date Released',
     'field_name' => 'field_datereleased',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '6',
+    'weight' => '8',
     'rows' => 5,
     'size' => '60',
     'description' => '',
@@ -280,10 +575,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '8',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -317,14 +613,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  3 => 
+  6 => 
   array (
     'label' => 'Date Updated',
     'field_name' => 'field_dateupdated',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '7',
+    'weight' => '9',
     'rows' => 5,
     'size' => '60',
     'description' => '',
@@ -371,10 +667,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '9',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -408,14 +705,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  4 => 
+  7 => 
   array (
     'label' => 'Time Period',
     'field_name' => 'field_timeperiod',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '8',
+    'weight' => '10',
     'rows' => 5,
     'size' => '60',
     'description' => '',
@@ -462,10 +759,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '10',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -499,14 +797,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  5 => 
+  8 => 
   array (
     'label' => 'Citation',
     'field_name' => 'field_citation',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '9',
+    'weight' => '11',
     'rows' => 5,
     'size' => '240',
     'description' => '',
@@ -561,10 +859,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '11',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -598,209 +897,7 @@ $content['fields']  = array (
       ),
     ),
   ),
-  6 => 
-  array (
-    'label' => 'Subagency',
-    'field_name' => 'field_subagency',
-    'type' => 'text',
-    'widget_type' => 'text_textfield',
-    'change' => 'Change basic information',
-    'weight' => '10',
-    'rows' => 5,
-    'size' => '60',
-    'description' => '',
-    'default_value' => 
-    array (
-      0 => 
-      array (
-        'value' => '',
-        '_error_element' => 'default_value_widget][field_subagency][0][value',
-      ),
-    ),
-    'default_value_php' => '',
-    'default_value_widget' => 
-    array (
-      'field_subagency' => 
-      array (
-        0 => 
-        array (
-          'value' => '',
-          '_error_element' => 'default_value_widget][field_subagency][0][value',
-        ),
-      ),
-    ),
-    'group' => false,
-    'required' => 0,
-    'multiple' => '0',
-    'text_processing' => '0',
-    'max_length' => '',
-    'allowed_values' => '',
-    'allowed_values_php' => '',
-    'op' => 'Save field settings',
-    'module' => 'text',
-    'widget_module' => 'text',
-    'columns' => 
-    array (
-      'value' => 
-      array (
-        'type' => 'text',
-        'size' => 'big',
-        'not null' => false,
-        'sortable' => true,
-        'views' => true,
-      ),
-    ),
-    'display_settings' => 
-    array (
-      'label' => 
-      array (
-        'format' => 'above',
-        'exclude' => 0,
-      ),
-      'teaser' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      4 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      2 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      3 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'token' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-  ),
-  7 => 
-  array (
-    'label' => 'URL',
-    'field_name' => 'field_url',
-    'type' => 'link',
-    'widget_type' => 'link',
-    'change' => 'Change basic information',
-    'weight' => '11',
-    'description' => '',
-    'default_value' => 
-    array (
-      0 => 
-      array (
-        'title' => '',
-        'url' => '',
-      ),
-    ),
-    'default_value_php' => '',
-    'default_value_widget' => 
-    array (
-      'field_url' => 
-      array (
-        0 => 
-        array (
-          'title' => '',
-          'url' => '',
-        ),
-      ),
-    ),
-    'group' => false,
-    'required' => 0,
-    'multiple' => '0',
-    'url' => 0,
-    'title' => '',
-    'title_value' => '',
-    'enable_tokens' => 0,
-    'display' => 
-    array (
-      'url_cutoff' => '80',
-    ),
-    'attributes' => 
-    array (
-      'target' => 'default',
-      'rel' => '',
-      'class' => '',
-    ),
-    'op' => 'Save field settings',
-    'module' => 'link',
-    'widget_module' => 'link',
-    'columns' => 
-    array (
-      'url' => 
-      array (
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => false,
-        'sortable' => true,
-      ),
-      'title' => 
-      array (
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => false,
-        'sortable' => true,
-      ),
-      'attributes' => 
-      array (
-        'type' => 'text',
-        'size' => 'medium',
-        'not null' => false,
-      ),
-    ),
-    'display_settings' => 
-    array (
-      'label' => 
-      array (
-        'format' => 'above',
-        'exclude' => 0,
-      ),
-      'teaser' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      4 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      2 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      3 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'token' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-  ),
-  8 => 
+  9 => 
   array (
     'label' => 'Frequency',
     'field_name' => 'field_frequency',
@@ -854,10 +951,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '12',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -891,14 +989,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  9 => 
+  10 => 
   array (
     'label' => 'Data.gov Data Category Type',
     'field_name' => 'field_datagov_data_category',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '13',
+    'weight' => '14',
     'rows' => 5,
     'size' => '60',
     'description' => '',
@@ -945,10 +1043,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '14',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -982,14 +1081,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  10 => 
+  11 => 
   array (
     'label' => 'Specialized Data Category Designation',
     'field_name' => 'field_specialized_data_category',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '14',
+    'weight' => '15',
     'rows' => 5,
     'size' => '60',
     'description' => '',
@@ -1036,10 +1135,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '15',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -1073,14 +1173,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  11 => 
+  12 => 
   array (
     'label' => 'Agency Program Page',
     'field_name' => 'field_agency_program_page',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '15',
+    'weight' => '17',
     'rows' => 5,
     'size' => '1000',
     'description' => '',
@@ -1136,10 +1236,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '17',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -1173,14 +1274,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  12 => 
+  13 => 
   array (
     'label' => 'Agency Data Series Page',
     'field_name' => 'field_agency_data_series_page',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '16',
+    'weight' => '18',
     'rows' => 5,
     'size' => '1000',
     'description' => '',
@@ -1236,10 +1337,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '18',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -1273,14 +1375,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  13 => 
+  14 => 
   array (
     'label' => 'Unit of Analysis',
     'field_name' => 'field_unit_of_analysis',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '17',
+    'weight' => '19',
     'rows' => 5,
     'size' => '480',
     'description' => '',
@@ -1327,10 +1429,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '19',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -1364,14 +1467,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  14 => 
+  15 => 
   array (
     'label' => 'Granularity',
     'field_name' => 'field_granularity',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '18',
+    'weight' => '20',
     'rows' => 5,
     'size' => '960',
     'description' => '',
@@ -1418,10 +1521,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '20',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -1455,14 +1559,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  15 => 
+  16 => 
   array (
     'label' => 'Geographic Coverage',
     'field_name' => 'field_geographic_coverage',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '19',
+    'weight' => '21',
     'rows' => 5,
     'size' => '480',
     'description' => '',
@@ -1509,101 +1613,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '21',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
-      ),
-      'teaser' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      4 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      2 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      3 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'token' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-  ),
-  16 => 
-  array (
-    'label' => 'Collection Mode',
-    'field_name' => 'field_collection_mode',
-    'type' => 'text',
-    'widget_type' => 'text_textfield',
-    'change' => 'Change basic information',
-    'weight' => '20',
-    'rows' => 5,
-    'size' => '960',
-    'description' => '',
-    'default_value' => 
-    array (
-      0 => 
-      array (
-        'value' => '',
-        '_error_element' => 'default_value_widget][field_collection_mode][0][value',
-      ),
-    ),
-    'default_value_php' => '',
-    'default_value_widget' => 
-    array (
-      'field_collection_mode' => 
-      array (
-        0 => 
-        array (
-          'value' => '',
-          '_error_element' => 'default_value_widget][field_collection_mode][0][value',
-        ),
-      ),
-    ),
-    'group' => false,
-    'required' => 0,
-    'multiple' => '0',
-    'text_processing' => '0',
-    'max_length' => '',
-    'allowed_values' => '',
-    'allowed_values_php' => '',
-    'op' => 'Save field settings',
-    'module' => 'text',
-    'widget_module' => 'text',
-    'columns' => 
-    array (
-      'value' => 
-      array (
-        'type' => 'text',
-        'size' => 'big',
-        'not null' => false,
-        'sortable' => true,
-        'views' => true,
-      ),
-    ),
-    'display_settings' => 
-    array (
-      'label' => 
-      array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -1639,12 +1653,112 @@ $content['fields']  = array (
   ),
   17 => 
   array (
+    'label' => 'Collection Mode',
+    'field_name' => 'field_collection_mode',
+    'type' => 'text',
+    'widget_type' => 'text_textfield',
+    'change' => 'Change basic information',
+    'weight' => '22',
+    'rows' => 5,
+    'size' => '960',
+    'description' => '',
+    'default_value' => 
+    array (
+      0 => 
+      array (
+        'value' => '',
+        '_error_element' => 'default_value_widget][field_collection_mode][0][value',
+      ),
+    ),
+    'default_value_php' => '',
+    'default_value_widget' => 
+    array (
+      'field_collection_mode' => 
+      array (
+        0 => 
+        array (
+          'value' => '',
+          '_error_element' => 'default_value_widget][field_collection_mode][0][value',
+          'format' => 1,
+        ),
+      ),
+    ),
+    'group' => false,
+    'required' => 0,
+    'multiple' => '0',
+    'text_processing' => '1',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'op' => 'Save field settings',
+    'module' => 'text',
+    'widget_module' => 'text',
+    'columns' => 
+    array (
+      'value' => 
+      array (
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => false,
+        'sortable' => true,
+        'views' => true,
+      ),
+      'format' => 
+      array (
+        'type' => 'int',
+        'unsigned' => true,
+        'not null' => false,
+        'views' => false,
+      ),
+    ),
+    'display_settings' => 
+    array (
+      'weight' => '22',
+      'parent' => '',
+      'label' => 
+      array (
+        'format' => 'inline',
+      ),
+      'teaser' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      4 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      2 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      3 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+  ),
+  18 => 
+  array (
     'label' => 'Data Collection Instrument',
     'field_name' => 'field_data_collection_instrument',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '21',
+    'weight' => '23',
     'rows' => 5,
     'size' => '1000',
     'description' => '',
@@ -1700,10 +1814,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '23',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -1737,14 +1852,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  18 => 
+  19 => 
   array (
     'label' => 'Data Dictionary/Variable List',
     'field_name' => 'field_data_dictionary_variable_l',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '22',
+    'weight' => '24',
     'rows' => 5,
     'size' => '1000',
     'description' => '',
@@ -1800,10 +1915,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '24',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -1837,14 +1953,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  19 => 
+  20 => 
   array (
     'label' => 'Applicable Agency Information Quality Guideline Designation',
     'field_name' => 'field_applicable_agency_info',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '23',
+    'weight' => '25',
     'rows' => 5,
     'size' => '480',
     'description' => '',
@@ -1891,10 +2007,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '25',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -1928,14 +2045,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  20 => 
+  21 => 
   array (
     'label' => 'Data Quality Certification',
     'field_name' => 'field_data_quality_certification',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '24',
+    'weight' => '26',
     'rows' => 5,
     'size' => '120',
     'description' => '',
@@ -1982,10 +2099,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '26',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -2019,14 +2137,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  21 => 
+  22 => 
   array (
     'label' => 'Privacy and Confidentiality',
     'field_name' => 'field_privacy_and_conf',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '25',
+    'weight' => '27',
     'rows' => 5,
     'size' => '480',
     'description' => '',
@@ -2073,10 +2191,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '27',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -2110,14 +2229,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  22 => 
+  23 => 
   array (
     'label' => 'Technical Documentation',
     'field_name' => 'field_technical_documentation',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '26',
+    'weight' => '28',
     'rows' => 5,
     'size' => '480',
     'description' => '',
@@ -2172,10 +2291,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '28',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -2209,14 +2329,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  23 => 
+  24 => 
   array (
     'label' => 'Additional Metadata',
     'field_name' => 'field_additional_metadata',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '27',
+    'weight' => '29',
     'rows' => 5,
     'size' => '960',
     'description' => '',
@@ -2271,10 +2391,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '29',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -2308,14 +2429,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  24 => 
+  25 => 
   array (
     'label' => 'FGDC Compliance (Geospatial Only)',
     'field_name' => 'field_fgdc_compliance',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '28',
+    'weight' => '30',
     'rows' => 5,
     'size' => '240',
     'description' => '',
@@ -2362,10 +2483,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '30',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -2399,14 +2521,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  25 => 
+  26 => 
   array (
     'label' => 'Statistical Methodology',
     'field_name' => 'field_statistical_methodology',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '29',
+    'weight' => '31',
     'rows' => 5,
     'size' => '1000',
     'description' => '',
@@ -2462,94 +2584,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '31',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
-      ),
-      'teaser' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      4 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      2 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      3 => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'token' => 
-      array (
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-  ),
-  26 => 
-  array (
-    'label' => 'Sampling',
-    'field_name' => 'field_sampling',
-    'type' => 'text',
-    'widget_type' => 'optionwidgets_select',
-    'change' => 'Change basic information',
-    'weight' => '30',
-    'description' => '',
-    'default_value' => 
-    array (
-      0 => 
-      array (
-        'value' => '',
-      ),
-    ),
-    'default_value_php' => '',
-    'default_value_widget' => 
-    array (
-      'field_sampling' => 
-      array (
-        'value' => '',
-      ),
-    ),
-    'group' => false,
-    'required' => 0,
-    'multiple' => '0',
-    'text_processing' => '0',
-    'max_length' => '',
-    'allowed_values' => '',
-    'allowed_values_php' => '',
-    'op' => 'Save field settings',
-    'module' => 'text',
-    'widget_module' => 'optionwidgets',
-    'columns' => 
-    array (
-      'value' => 
-      array (
-        'type' => 'text',
-        'size' => 'big',
-        'not null' => false,
-        'sortable' => true,
-        'views' => true,
-      ),
-    ),
-    'display_settings' => 
-    array (
-      'label' => 
-      array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -2585,34 +2624,40 @@ $content['fields']  = array (
   ),
   27 => 
   array (
-    'label' => 'Estimation',
-    'field_name' => 'field_estimation',
+    'label' => 'Sampling',
+    'field_name' => 'field_sampling',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '31',
+    'weight' => '32',
     'rows' => 5,
-    'size' => 60,
+    'size' => '60',
     'description' => '',
     'default_value' => 
     array (
+      0 => 
+      array (
+        'value' => '',
+        '_error_element' => 'default_value_widget][field_sampling][0][value',
+      ),
     ),
     'default_value_php' => '',
     'default_value_widget' => 
     array (
-      'field_estimation' => 
+      'field_sampling' => 
       array (
         0 => 
         array (
           'value' => '',
-          '_error_element' => 'default_value_widget][field_estimation][0][value',
+          '_error_element' => 'default_value_widget][field_sampling][0][value',
+          'format' => 1,
         ),
       ),
     ),
     'group' => false,
     'required' => 0,
     'multiple' => '0',
-    'text_processing' => '',
+    'text_processing' => '1',
     'max_length' => '',
     'allowed_values' => '',
     'allowed_values_php' => '',
@@ -2629,13 +2674,21 @@ $content['fields']  = array (
         'sortable' => true,
         'views' => true,
       ),
+      'format' => 
+      array (
+        'type' => 'int',
+        'unsigned' => true,
+        'not null' => false,
+        'views' => false,
+      ),
     ),
     'display_settings' => 
     array (
+      'weight' => '32',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -2671,12 +2724,112 @@ $content['fields']  = array (
   ),
   28 => 
   array (
+    'label' => 'Estimation',
+    'field_name' => 'field_estimation',
+    'type' => 'text',
+    'widget_type' => 'text_textfield',
+    'change' => 'Change basic information',
+    'weight' => '33',
+    'rows' => 5,
+    'size' => '60',
+    'description' => '',
+    'default_value' => 
+    array (
+      0 => 
+      array (
+        'value' => '',
+        '_error_element' => 'default_value_widget][field_estimation][0][value',
+      ),
+    ),
+    'default_value_php' => '',
+    'default_value_widget' => 
+    array (
+      'field_estimation' => 
+      array (
+        0 => 
+        array (
+          'value' => '',
+          '_error_element' => 'default_value_widget][field_estimation][0][value',
+          'format' => 1,
+        ),
+      ),
+    ),
+    'group' => false,
+    'required' => 0,
+    'multiple' => '0',
+    'text_processing' => '1',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'op' => 'Save field settings',
+    'module' => 'text',
+    'widget_module' => 'text',
+    'columns' => 
+    array (
+      'value' => 
+      array (
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => false,
+        'sortable' => true,
+        'views' => true,
+      ),
+      'format' => 
+      array (
+        'type' => 'int',
+        'unsigned' => true,
+        'not null' => false,
+        'views' => false,
+      ),
+    ),
+    'display_settings' => 
+    array (
+      'weight' => '33',
+      'parent' => '',
+      'label' => 
+      array (
+        'format' => 'inline',
+      ),
+      'teaser' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      4 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      2 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      3 => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => 
+      array (
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+  ),
+  29 => 
+  array (
     'label' => 'Weighting',
     'field_name' => 'field_weighting',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '32',
+    'weight' => '34',
     'rows' => 5,
     'size' => '1000',
     'description' => '',
@@ -2731,10 +2884,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '34',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -2768,14 +2922,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  29 => 
+  30 => 
   array (
     'label' => 'Disclosure Avoidance',
     'field_name' => 'field_disclosure_avoidance',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '33',
+    'weight' => '35',
     'rows' => '5',
     'size' => '1000',
     'description' => '',
@@ -2831,10 +2985,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '35',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -2868,14 +3023,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  30 => 
+  31 => 
   array (
     'label' => 'Questionnaire Design',
     'field_name' => 'field_questionnaire_design',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '34',
+    'weight' => '36',
     'rows' => 5,
     'size' => '1000',
     'description' => '',
@@ -2930,10 +3085,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '36',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -2967,14 +3123,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  31 => 
+  32 => 
   array (
     'label' => 'Series Breaks',
     'field_name' => 'field_series_breaks',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '35',
+    'weight' => '37',
     'rows' => 5,
     'size' => '1000',
     'description' => '',
@@ -3029,10 +3185,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '37',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -3066,14 +3223,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  32 => 
+  33 => 
   array (
     'label' => 'Non-response Adjustment',
     'field_name' => 'field_non_response_adjustment',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '36',
+    'weight' => '38',
     'rows' => 5,
     'size' => '1000',
     'description' => '',
@@ -3128,10 +3285,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '38',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -3165,14 +3323,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  33 => 
+  34 => 
   array (
     'label' => 'Seasonal Adjustment',
     'field_name' => 'field_seasonal_adjustment',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '37',
+    'weight' => '39',
     'rows' => 5,
     'size' => '1000',
     'description' => '',
@@ -3227,10 +3385,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '39',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -3264,14 +3423,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  34 => 
+  35 => 
   array (
     'label' => 'Statistical Characteristics',
     'field_name' => 'field_statistical_characteristic',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '38',
+    'weight' => '40',
     'rows' => 5,
     'size' => '1000',
     'description' => '',
@@ -3326,10 +3485,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '40',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -3363,14 +3523,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  35 => 
+  36 => 
   array (
     'label' => 'Feeds Access Point',
     'field_name' => 'field_feeds_access_point',
     'type' => 'link',
     'widget_type' => 'link',
     'change' => 'Change basic information',
-    'weight' => '39',
+    'weight' => '41',
     'description' => '',
     'default_value' => 
     array (
@@ -3408,6 +3568,7 @@ $content['fields']  = array (
       'target' => 'default',
       'rel' => '',
       'class' => '',
+      'title' => '',
     ),
     'op' => 'Save field settings',
     'module' => 'link',
@@ -3417,7 +3578,7 @@ $content['fields']  = array (
       'url' => 
       array (
         'type' => 'varchar',
-        'length' => 255,
+        'length' => 2048,
         'not null' => false,
         'sortable' => true,
       ),
@@ -3437,10 +3598,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '41',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -3474,14 +3636,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  36 => 
+  37 => 
   array (
     'label' => 'Feeds File Size',
     'field_name' => 'field_feeds_file_size',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '40',
+    'weight' => '42',
     'rows' => 5,
     'size' => '80',
     'description' => '',
@@ -3528,10 +3690,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '42',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -3565,14 +3728,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  37 => 
+  38 => 
   array (
     'label' => 'XML Access Point',
     'field_name' => 'field_xml_access_point',
     'type' => 'link',
     'widget_type' => 'link',
     'change' => 'Change basic information',
-    'weight' => '41',
+    'weight' => '43',
     'description' => '',
     'default_value' => 
     array (
@@ -3610,6 +3773,7 @@ $content['fields']  = array (
       'target' => 'default',
       'rel' => '',
       'class' => '',
+      'title' => '',
     ),
     'op' => 'Save field settings',
     'module' => 'link',
@@ -3619,7 +3783,7 @@ $content['fields']  = array (
       'url' => 
       array (
         'type' => 'varchar',
-        'length' => 255,
+        'length' => 2048,
         'not null' => false,
         'sortable' => true,
       ),
@@ -3639,10 +3803,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '43',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -3676,14 +3841,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  38 => 
+  39 => 
   array (
     'label' => 'XML File Size',
     'field_name' => 'field_xml_file_size',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '42',
+    'weight' => '44',
     'rows' => 5,
     'size' => '60',
     'description' => '',
@@ -3730,10 +3895,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '44',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -3767,14 +3933,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  39 => 
+  40 => 
   array (
     'label' => 'CSV/TXT Access Point',
     'field_name' => 'field_csv_txt_access_point',
     'type' => 'link',
     'widget_type' => 'link',
     'change' => 'Change basic information',
-    'weight' => '43',
+    'weight' => '45',
     'description' => '',
     'default_value' => 
     array (
@@ -3812,6 +3978,7 @@ $content['fields']  = array (
       'target' => 'default',
       'rel' => '',
       'class' => '',
+      'title' => '',
     ),
     'op' => 'Save field settings',
     'module' => 'link',
@@ -3821,7 +3988,7 @@ $content['fields']  = array (
       'url' => 
       array (
         'type' => 'varchar',
-        'length' => 255,
+        'length' => 2048,
         'not null' => false,
         'sortable' => true,
       ),
@@ -3841,10 +4008,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '45',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -3878,14 +4046,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  40 => 
+  41 => 
   array (
     'label' => 'CSV/TXT File Size',
     'field_name' => 'field_csv_txt_file_size',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '44',
+    'weight' => '46',
     'rows' => 5,
     'size' => '60',
     'description' => '',
@@ -3932,10 +4100,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '46',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -3969,14 +4138,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  41 => 
+  42 => 
   array (
     'label' => 'XLS Access Point',
     'field_name' => 'field_xls_access_point',
     'type' => 'link',
     'widget_type' => 'link',
     'change' => 'Change basic information',
-    'weight' => '45',
+    'weight' => '47',
     'description' => '',
     'default_value' => 
     array (
@@ -4014,6 +4183,7 @@ $content['fields']  = array (
       'target' => 'default',
       'rel' => '',
       'class' => '',
+      'title' => '',
     ),
     'op' => 'Save field settings',
     'module' => 'link',
@@ -4023,7 +4193,7 @@ $content['fields']  = array (
       'url' => 
       array (
         'type' => 'varchar',
-        'length' => 255,
+        'length' => 2048,
         'not null' => false,
         'sortable' => true,
       ),
@@ -4043,10 +4213,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '47',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -4080,14 +4251,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  42 => 
+  43 => 
   array (
     'label' => 'XLS File Size',
     'field_name' => 'field_xls_file_size',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '46',
+    'weight' => '48',
     'rows' => 5,
     'size' => '60',
     'description' => '',
@@ -4134,10 +4305,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '48',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -4171,14 +4343,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  43 => 
+  44 => 
   array (
     'label' => 'KML/KMZ Access Point',
     'field_name' => 'field_kml_kmz_access_point',
     'type' => 'link',
     'widget_type' => 'link',
     'change' => 'Change basic information',
-    'weight' => '47',
+    'weight' => '49',
     'description' => '',
     'default_value' => 
     array (
@@ -4216,6 +4388,7 @@ $content['fields']  = array (
       'target' => 'default',
       'rel' => '',
       'class' => '',
+      'title' => '',
     ),
     'op' => 'Save field settings',
     'module' => 'link',
@@ -4225,7 +4398,7 @@ $content['fields']  = array (
       'url' => 
       array (
         'type' => 'varchar',
-        'length' => 255,
+        'length' => 2048,
         'not null' => false,
         'sortable' => true,
       ),
@@ -4245,10 +4418,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '49',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -4282,14 +4456,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  44 => 
+  45 => 
   array (
     'label' => 'KML File Size',
     'field_name' => 'field_kml_file_size',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '48',
+    'weight' => '50',
     'rows' => 5,
     'size' => '60',
     'description' => '',
@@ -4336,10 +4510,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '50',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -4373,14 +4548,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  45 => 
+  46 => 
   array (
     'label' => 'ESRI Access Point',
     'field_name' => 'field_esri_access_point',
     'type' => 'link',
     'widget_type' => 'link',
     'change' => 'Change basic information',
-    'weight' => '49',
+    'weight' => '51',
     'description' => '',
     'default_value' => 
     array (
@@ -4418,6 +4593,7 @@ $content['fields']  = array (
       'target' => 'default',
       'rel' => '',
       'class' => '',
+      'title' => '',
     ),
     'op' => 'Save field settings',
     'module' => 'link',
@@ -4427,7 +4603,7 @@ $content['fields']  = array (
       'url' => 
       array (
         'type' => 'varchar',
-        'length' => 255,
+        'length' => 2048,
         'not null' => false,
         'sortable' => true,
       ),
@@ -4447,10 +4623,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '51',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -4484,14 +4661,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  46 => 
+  47 => 
   array (
     'label' => 'ESRI File Size',
     'field_name' => 'field_esri_file_size',
     'type' => 'text',
     'widget_type' => 'text_textfield',
     'change' => 'Change basic information',
-    'weight' => '50',
+    'weight' => '52',
     'rows' => 5,
     'size' => '60',
     'description' => '',
@@ -4538,10 +4715,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '52',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -4575,14 +4753,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  47 => 
+  48 => 
   array (
     'label' => 'Map Access Point',
     'field_name' => 'field_map_access_point',
     'type' => 'link',
     'widget_type' => 'link',
     'change' => 'Change basic information',
-    'weight' => '51',
+    'weight' => '53',
     'description' => '',
     'default_value' => 
     array (
@@ -4620,6 +4798,7 @@ $content['fields']  = array (
       'target' => 'default',
       'rel' => '',
       'class' => '',
+      'title' => '',
     ),
     'op' => 'Save field settings',
     'module' => 'link',
@@ -4629,7 +4808,7 @@ $content['fields']  = array (
       'url' => 
       array (
         'type' => 'varchar',
-        'length' => 255,
+        'length' => 2048,
         'not null' => false,
         'sortable' => true,
       ),
@@ -4649,10 +4828,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '53',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -4686,14 +4866,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  48 => 
+  49 => 
   array (
     'label' => 'Data Extraction Access Point',
     'field_name' => 'field_data_extraction_access_poi',
     'type' => 'link',
     'widget_type' => 'link',
     'change' => 'Change basic information',
-    'weight' => '52',
+    'weight' => '54',
     'description' => '',
     'default_value' => 
     array (
@@ -4731,6 +4911,7 @@ $content['fields']  = array (
       'target' => 'default',
       'rel' => '',
       'class' => '',
+      'title' => '',
     ),
     'op' => 'Save field settings',
     'module' => 'link',
@@ -4740,7 +4921,7 @@ $content['fields']  = array (
       'url' => 
       array (
         'type' => 'varchar',
-        'length' => 255,
+        'length' => 2048,
         'not null' => false,
         'sortable' => true,
       ),
@@ -4760,10 +4941,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '54',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -4797,14 +4979,14 @@ $content['fields']  = array (
       ),
     ),
   ),
-  49 => 
+  50 => 
   array (
     'label' => 'Widget Access Point',
     'field_name' => 'field_widget_access_point',
     'type' => 'link',
     'widget_type' => 'link',
     'change' => 'Change basic information',
-    'weight' => '53',
+    'weight' => '55',
     'description' => '',
     'default_value' => 
     array (
@@ -4842,6 +5024,7 @@ $content['fields']  = array (
       'target' => 'default',
       'rel' => '',
       'class' => '',
+      'title' => '',
     ),
     'op' => 'Save field settings',
     'module' => 'link',
@@ -4851,7 +5034,7 @@ $content['fields']  = array (
       'url' => 
       array (
         'type' => 'varchar',
-        'length' => 255,
+        'length' => 2048,
         'not null' => false,
         'sortable' => true,
       ),
@@ -4871,10 +5054,11 @@ $content['fields']  = array (
     ),
     'display_settings' => 
     array (
+      'weight' => '55',
+      'parent' => '',
       'label' => 
       array (
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'inline',
       ),
       'teaser' => 
       array (
@@ -4910,14 +5094,14 @@ $content['fields']  = array (
   ),
 );
 $content['extra']  = array (
-  'title' => '-5',
-  'body_field' => '-2',
-  'revision_information' => '-1',
-  'comment_settings' => '2',
+  'title' => '4',
+  'body_field' => '13',
+  'revision_information' => '-3',
+  'comment_settings' => '0',
   'menu' => '-4',
-  'taxonomy' => '-3',
-  'path' => '1',
-  'attachments' => '0',
-  'mollom' => '3',
+  'taxonomy' => '16',
+  'path' => '-1',
+  'attachments' => '-2',
+  'mollom' => '1',
 );
 
