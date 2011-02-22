@@ -1,6 +1,8 @@
 <?php
 /**
-* Filter input URL to encode high ASCII characters
+
+convert non-iso ascii to utf8
+
 */
 if (isset($_GET["url"])) {
     $url = $_GET["url"];
